@@ -1,0 +1,37 @@
+pipeline {
+  agent any
+  stages {
+    stage('build') {
+      steps {
+        sh 'pwd'
+        sh 'pwd'
+      }
+    }
+
+    stage('test') {
+      parallel {
+        stage('test') {
+          steps {
+            sh 'install mvn'
+          }
+        }
+
+        stage('test-par') {
+          steps {
+            echo 'parlell-run'
+          }
+        }
+
+      }
+    }
+
+    stage('deploy') {
+      steps {
+        echo 'deplo'
+        sleep 30
+        input(message: 'is it to deploy', id: '25', ok: 'ok submit')
+      }
+    }
+
+  }
+}
